@@ -1,0 +1,153 @@
+<materias>
+    // Materias con temarios y ejemplos para Ingeniería en Sistemas Computacionales
+    const materias = {
+        sistemas: {
+            "1": [
+                {
+                    nombre: "Cálculo Diferencial",
+                    temario: [
+                        "Límites y continuidad",
+                        "Derivadas",
+                        "Aplicaciones de la derivada"
+                    ],
+                    ejemplos: [
+                        {
+                            titulo: "Ejemplo 1: Límite de una función",
+                            descripcion: "Calcula el límite de f(x) = (x² - 1)/(x - 1) cuando x → 1",
+                            pasos: [
+                                "f(x) = (x² - 1)/(x - 1)",
+                                "Factoriza: (x² - 1) = (x - 1)(x + 1)",
+                                "f(x) = [(x - 1)(x + 1)] / (x - 1)",
+                                "Simplificas: f(x) = x + 1",
+                                "Entonces, lim(x→1) f(x) = 1 + 1 = 2"
+                            ]
+                        },
+                        {
+                            titulo: "Ejemplo 2: Derivada básica",
+                            descripcion: "Derivar f(x) = x³",
+                            pasos: [
+                                "Usa la regla de potencias: d/dx [xⁿ] = n·xⁿ⁻¹",
+                                "f'(x) = 3x²"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    nombre: "Álgebra Lineal",
+                    temario: ["Matrices", "Determinantes", "Sistemas de ecuaciones lineales"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Cálculo Integral",
+                    temario: ["Integrales definidas", "Métodos de integración"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Cálculo Vectorial",
+                    temario: ["Campos vectoriales", "Derivadas parciales"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Contabilidad Financiera",
+                    temario: ["Balance general", "Estado de resultados"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Cultura Empresarial",
+                    temario: ["Liderazgo", "Visión empresarial"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Desarrollo Sustentable",
+                    temario: ["Recursos naturales", "Tecnología y medio ambiente"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Estructura de Datos",
+                    temario: ["Listas", "Pilas", "Colas", "Árboles"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Física General",
+                    temario: ["Cinemática", "Dinámica", "Trabajo y energía"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Fundamentos de Investigación",
+                    temario: ["Método científico", "Planteamiento del problema"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Fundamentos de Programación",
+                    temario: ["Variables", "Condicionales", "Ciclos", "Funciones"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Investigación de Operaciones",
+                    temario: ["Programación lineal", "Transporte", "Asignación"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Matemáticas Discretas",
+                    temario: ["Lógica proposicional", "Conjuntos", "Grafos"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Probabilidad y Estadística",
+                    temario: ["Distribuciones", "Media y varianza", "Probabilidades"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Programación Orientada a Objetos",
+                    temario: ["Clases y objetos", "Encapsulamiento", "Herencia"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Química",
+                    temario: ["Estructura atómica", "Reacciones químicas"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Taller de Administración",
+                    temario: ["Planeación", "Organización", "Control"],
+                    ejemplos: []
+                },
+                {
+                    nombre: "Taller de Ética",
+                    temario: ["Valores", "Ética profesional", "Responsabilidad social"],
+                    ejemplos: []
+                }
+            ]
+        }
+    };
+
+    function showMaterias(carrera, semestre) {
+        document.getElementById("semestres").classList.add("hidden");
+        document.getElementById("materias").classList.remove("hidden");
+
+        const materiasList = document.getElementById("materias-list");
+        materiasList.innerHTML = "";
+
+        const materiasSemestre = materias[carrera][semestre];
+        if (!materiasSemestre) {
+            materiasList.innerHTML = "<p>No hay materias disponibles.</p>";
+            return;
+        }
+
+        materiasSemestre.forEach(materia => {
+            const div = document.createElement("div");
+            div.className = "card";
+            div.innerHTML = `<strong>${materia.nombre}</strong><br><em>Temario:</em><ul>${
+                materia.temario.map(t => `<li>${t}</li>`).join("")
+            }</ul><br><em>Ejemplos:</em><ul>${
+                materia.ejemplos.map(ej => `
+                    <li>
+                        <strong>${ej.titulo}:</strong> ${ej.descripcion}<br>
+                        <em>Pasos:</em><ol>${ej.pasos.map(p => `<li>${p}</li>`).join("")}</ol>
+                    </li>
+                `).join("")
+            }</ul>`;
+            materiasList.appendChild(div);
+        });
+    }
+</script>

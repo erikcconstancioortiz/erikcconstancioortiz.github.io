@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Búsqueda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .search-history {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .search-item {
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-item a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .search-item a:hover {
+            text-decoration: underline;
+        }
+
+        .clear-history-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #FF6F61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .clear-history-btn:hover {
+            background-color: #FF3E2A;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Historial de Búsqueda</h1>
+        <ul class="search-history">
+            <li class="search-item">
+                <span>Búsqueda 1: <a href="#">Resultado 1</a></span>
+                <span>12/03/2025</span>
+            </li>
+            <li class="search-item">
+                <span>Búsqueda 2: <a href="#">Resultado 2</a></span>
+                <span>10/03/2025</span>
+            </li>
+            <li class="search-item">
+                <span>Búsqueda 3: <a href="#">Resultado 3</a></span>
+                <span>08/03/2025</span>
+            </li>
+        </ul>
+        <button class="clear-history-btn">Limpiar Historial</button>
+    </div>
+
+</body>
+</html>

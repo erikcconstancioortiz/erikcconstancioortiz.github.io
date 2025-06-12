@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>EduLink - Carreras y Menú</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #e0f7e9; color: #333; text-align: center; }
+        .card {
+            width: 350px;
+            background: #a7e3a4;
+            margin: 10px auto;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .contenido {
+            background: #e8f5e9;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            border-radius: 8px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #8bc34a;
+            color: #fff;
+            border: none;
+        }
+        button:hover { background-color: #689f38; }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #d0e9d3;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover { background-color: #b2dfdb; }
+        .dropdown:hover .dropdown-content { display: block; }
+    </style>
+</head>
+<body>
+
+<h1>EduLink - Carreras</h1>
+
+<div class="dropdown">
+  <button>Materias y Historial</button>
+  <div class="dropdown-content">
+    <a href="#" onclick="mostrarHistorial()">Historial</a>
+    <a href="#" onclick="alert('Consulta las materias en cada semestre')">Materias</a>
+  </div>
+</div>
+
+<div class="card" onclick="mostrarSemestres('sistemas')">Ingeniería en Sistemas</div>
+<div class="card" onclick="mostrarSemestres('civil')">Ingeniería Civil</div>
+<div class="card" onclick="mostrarSemestres('industrial')">Ingeniería Industrial</div>
+<div class="card" onclick="mostrarSemestres('electronica')">Ingeniería Electrónica</div>
+<div class="card" onclick="mostrarSemestres('gestion')">Ingeniería en Gestión Empresarial</div>
+<div class="card" onclick="mostrarSemestres('tic')">Ingeniería en TIC</div>
+<div class="card" onclick="mostrarSemestres('bioquimica')">Ingeniería Bioquímica</div>
+<div class="card" onclick="mostrarSemestres('quimica')">Ingeniería Química</div>
+<div class="card" onclick="mostrarSemestres('mecatronica')">Ingeniería Mecatrónica</div>
+
+<div id="semestres" class="contenido"></div>
+<div id="materias" class="contenido"></div>
+<div id="historial" class="contenido"></div>
+
+<script>
+    const datosCarreras = {
+        sistemas: {1: ["Fundamentos de Programación", "Matemáticas I", "Lógica Computacional"], 2: ["Estructura de Datos", "Matemáticas II", "Arquitectura de Computadoras"], 3: ["POO", "Base de Datos I", "Matemáticas Discretas"], 4: ["Ingeniería de Software I", "Base de Datos II", "Sistemas Operativos"], 5: ["Redes de Computadoras", "Programación Web", "Metodologías Ágiles"], 6: ["Seguridad Informática", "Inteligencia Artificial", "Computación en la Nube"], 7: ["Tópicos Avanzados", "Desarrollo Móvil", "Gestión de Proyectos"], 8: ["Seminario de Investigación", "Big Data", "Internet de las Cosas"], 9: ["Residencia Profesional", "Desarrollo de Software Final"]},
+        civil: {1: ["Dibujo Técnico", "Matemáticas I", "Química"], 2: ["Topografía I", "Resistencia de Materiales", "Matemáticas II"], 3: ["Mecánica de Suelos", "Hidráulica", "Construcción I"], 4: ["Estructuras I", "Vías Terrestres", "Geotecnia"], 5: ["Hormigón Armado", "Instalaciones Hidrosanitarias", "Costos y Presupuestos"], 6: ["Puentes", "Estructuras Metálicas", "Urbanismo"], 7: ["Carreteras", "Administración de Obras", "Túneles"], 8: ["Seminario de Titulación", "Evaluación de Impacto Ambiental", "Obra Pública"], 9: ["Residencia Profesional", "Proyecto Ejecutivo"]},
+        industrial: {1: ["Química Industrial", "Matemáticas I", "Administración General"], 2: ["Ingeniería de Métodos", "Contabilidad Industrial", "Estadística I"]},
+        electronica: {1: ["Circuitos Eléctricos", "Matemáticas I", "Introducción a la Electrónica"], 2: ["Electrónica Digital", "Matemáticas II", "Sistemas Electrónicos"]},
+        gestion: {1: ["Contabilidad", "Matemáticas I", "Fundamentos de Administración"], 2: ["Gestión de Proyectos", "Estadística I", "Derecho Empresarial"]},
+        tic: {1: ["Fundamentos TIC", "Matemáticas I", "Algoritmos"], 2: ["Bases de Datos", "Redes I", "Matemáticas II"]},
+        bioquimica: {1: ["Química General", "Biología Celular", "Matemáticas I"], 2: ["Microbiología", "Bioquímica I", "Química Orgánica"]},
+        quimica: {1: ["Química Inorgánica", "Matemáticas I", "Física General"], 2: ["Química Orgánica", "Termodinámica", "Matemáticas II"]},
+        mecatronica: {1: ["Introducción a la Mecatrónica", "Matemáticas I", "Física"], 2: ["Programación de Microcontroladores", "Mecánica", "Electrónica Digital"]}
+    };
+
+    let carreraSeleccionada = "";
+    let historial = [];
+
+    function mostrarSemestres(carrera) {
+        carreraSeleccionada = carrera;
+        let html = "<h3>Selecciona un semestre:</h3>";
+        for (let i = 1; i <= 9; i++) {
+            html += `<button onclick="mostrarMaterias(${i})">Semestre ${i}</button> `;
+        }
+        document.getElementById('semestres').innerHTML = html;
+        document.getElementById('materias').innerHTML = '';
+    }
+
+    function mostrarMaterias(semestre) {
+        const materias = datosCarreras[carreraSeleccionada][semestre];
+        if (materias) {
+            const lista = materias.map(m => `<li>${m}</li>`).join("");
+            const resultado = `<h3>Materias del Semestre ${semestre}:</h3><ul>${lista}</ul>`;
+            document.getElementById('materias').innerHTML = resultado;
+            historial.push(`Consulta de ${carreraSeleccionada.toUpperCase()}, semestre ${semestre}`);
+        } else {
+            document.getElementById('materias').innerHTML = `<h3>No hay materias registradas para el semestre ${semestre}.</h3>`;
+        }
+    }
+
+    function mostrarHistorial() {
+        let html = "<h3>Historial de Consultas:</h3>";
+        if(historial.length === 0) {
+            html += "<p>No has consultado nada aún.</p>";
+        } else {
+            html += "<ul>" + historial.map(h => `<li>${h}</li>`).join('') + "</ul>";
+        }
+        document.getElementById('historial').innerHTML = html;
+    }
+</script>
+
+</body>
+</html>

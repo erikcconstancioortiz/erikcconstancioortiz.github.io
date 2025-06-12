@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Horarios</title>
+    <style>
+        /* Estilo general */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            animation: fondoAnimado 10s infinite alternate;
+        }
+
+        @keyframes fondoAnimado {
+            0% { background: #4CAF50; }      /* Verde */
+            25% { background: #808080; }     /* Gris */
+            50% { background: #FFFFFF; }     /* Blanco */
+            75% { background: #006400; }     /* Verde fuerte */
+            100% { background: #4CAF50; }    /* Verde */
+        }
+
+        header {
+            background: #2E7D32;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+        }
+
+        .container {
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .ayuda {
+            font-weight: bold;
+            color: #00796B;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2E7D32;
+            color: white;
+        }
+
+        footer a {
+            color: #FFC107;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .volver-btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .volver-btn:hover {
+            background-color: #388E3C;
+        }
+    </style>
+</head>
+<body>
+
+<header>Horarios de Carreras Universitarias</header>
+
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>Hora</th>
+                <th>Contador Público</th>
+                <th>Lic. en Gastronomía</th>
+                <th>Ing. Ambiental</th>
+                <th>Ing. Industrial</th>
+                <th>Ing. Administración</th>
+                <th>Ing. Energías Renovables</th>
+                <th>Ing. en Sistemas Computacionales</th>
+                <th>Ing. en TI y Comunicaciones</th>
+                <th>Ing. en Sistemas Automotrices</th>
+                <th>Profesor/Alumno Ayudante</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>10:00 - 11:00</td>
+                <td>Contabilidad I (Sem 1)</td>
+                <td>Cocina Básica (Sem 1)</td>
+                <td>Ecología (Sem 1)</td>
+                <td>Estudio de Procesos (Sem 1)</td>
+                <td>Gestión Empresarial (Sem 1)</td>
+                <td>Fundamentos de Energías Renovables (Sem 1)</td>
+                <td>Programación I (Sem 1)</td>
+                <td>Redes de Comunicación (Sem 1)</td>
+                <td>Sistemas Automotrices (Sem 1)</td>
+                <td class="ayuda">Profesor: Mtro. Pérez</td>
+            </tr>
+            <tr>
+                <td>11:00 - 12:00</td>
+                <td>Matemáticas Financieras (Sem 2)</td>
+                <td>Pastelería (Sem 2)</td>
+                <td>Química Ambiental (Sem 2)</td>
+                <td>Optimización de Producción (Sem 2)</td>
+                <td>Marketing y Estrategia (Sem 2)</td>
+                <td>Generación de Energía Solar (Sem 2)</td>
+                <td>Bases de Datos (Sem 2)</td>
+                <td>Infraestructura de TI (Sem 2)</td>
+                <td>Electrónica Automotriz (Sem 2)</td>
+                <td class="ayuda">Alumno: Juan López</td>
+            </tr>
+            <tr>
+                <td>12:00 - 1:00</td>
+                <td>Auditoría (Sem 3)</td>
+                <td>Nutrición (Sem 3)</td>
+                <td>Impacto Ambiental (Sem 3)</td>
+                <td>Ergonomía (Sem 3)</td>
+                <td>Economía para Administradores (Sem 3)</td>
+                <td>Fuentes de Energía Eólica (Sem 3)</td>
+                <td>Redes de Computadoras (Sem 3)</td>
+                <td>Seguridad Informática (Sem 3)</td>
+                <td>Control de Sistemas Automotrices (Sem 3)</td>
+                <td class="ayuda">Profesor: Dra. Ramírez</td>
+            </tr>
+            <tr>
+                <td>1:00 - 2:00</td>
+                <td>Fiscal (Sem 4)</td>
+                <td>Cocina Internacional (Sem 4)</td>
+                <td>Gestión de Recursos Naturales (Sem 4)</td>
+                <td>Logística Industrial (Sem 4)</td>
+                <td>Dirección de Empresas (Sem 4)</td>
+                <td>Gestión Ambiental (Sem 4)</td>
+                <td>Inteligencia Artificial (Sem 4)</td>
+                <td>Soporte Técnico (Sem 4)</td>
+                <td>Sistemas de Diagnóstico Automotriz (Sem 4)</td>
+                <td class="ayuda">Alumno: Pedro Martínez</td>
+            </tr>
+            <tr>
+                <td>2:00 - 3:00</td>
+                <td colspan="9">Receso</td>
+                <td class="ayuda">—</td>
+            </tr>
+            <tr>
+                <td>3:00 - 4:00</td>
+                <td>Costos (Sem 5)</td>
+                <td>Enología (Sem 5)</td>
+                <td>Evaluación de Impacto Ambiental (Sem 5)</td>
+                <td>Ingeniería de Métodos (Sem 5)</td>
+                <td>Control de Gestión (Sem 5)</td>
+                <td>Proyectos de Energía Solar (Sem 5)</td>
+                <td>Desarrollo Web (Sem 5)</td>
+                <td>Redes 5G (Sem 5)</td>
+                <td>Mantenimiento Automotriz (Sem 5)</td>
+                <td class="ayuda">Profesor: Ing. Torres</td>
+            </tr>
+            <tr>
+                <td>4:00 - 5:00</td>
+                <td>Finanzas Corporativas (Sem 6)</td>
+                <td>Emplatado (Sem 6)</td>
+                <td>Tratamiento de Aguas (Sem 6)</td>
+                <td>Manufactura Avanzada (Sem 6)</td>
+                <td>Gestión de Recursos Humanos (Sem 6)</td>
+                <td>Innovación en Energías (Sem 6)</td>
+                <td>Seguridad en la Red (Sem 6)</td>
+                <td>Sistemas Embebidos (Sem 6)</td>
+                <td>Sistemas de Control Automotriz (Sem 6)</td>
+                <td class="ayuda">Alumno: María González</td>
+            </tr>
+            <tr>
+                <td>5:00 - 6:00</td>
+                <td>Legislación Fiscal (Sem 7)</td>
+                <td>Panadería (Sem 7)</td>
+                <td>Reciclaje (Sem 7)</td>
+                <td>Control de Calidad (Sem 7)</td>
+                <td>Ética Empresarial (Sem 7)</td>
+                <td>Proyectos de Energía Eólica (Sem 7)</td>
+                <td>Redes de Alta Velocidad (Sem 7)</td>
+                <td>Automatización Industrial (Sem 7)</td>
+                <td>Sistemas de Diagnóstico Automotriz (Sem 7)</td>
+                <td class="ayuda">Profesor: Lic. Andrade</td>
+            </tr>
+            <tr>
+                <td>6:00 - 7:00</td>
+                <td>Impuestos (Sem 8)</td>
+                <td>Cocina Avanzada (Sem 8)</td>
+                <td>Educación Ambiental (Sem 8)</td>
+                <td>Gestión de Proyectos Industriales (Sem 8)</td>
+                <td>Innovación en Gestión (Sem 8)</td>
+                <td>Auditoría Energética (Sem 8)</td>
+                <td>Machine Learning (Sem 8)</td>
+                <td>Redes de Computadoras (Sem 8)</td>
+                <td>Reparación Automotriz (Sem 8)</td>
+                <td class="ayuda">Alumno: Sofía Hernández</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Botón Volver al Inicio -->
+<button class="volver-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">Volver al Inicio</button>
+
+<footer>
+    <p>&copy; 2025 Universidad XYZ | <a href="#">Contactar</a></p>
+</footer>
+
+</body>
+</html>

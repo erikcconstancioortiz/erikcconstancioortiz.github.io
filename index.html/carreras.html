@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carreras y Materias</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(45deg, #006400, #228B22, #cccccc, #ffffff);
+            background-size: 300% 300%;
+            animation: fondoAnimado 10s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        @keyframes fondoAnimado {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            max-width: 1200px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            background: #228B22;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            font-size: 24px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.4s, box-shadow 0.4s, background 0.4s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            background: #006400;
+        }
+
+        .card:active {
+            transform: scale(0.95);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn {
+            display: inline-block;
+            margin: 20px 10px;
+            padding: 10px 30px;
+            background: #006400;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #004d00;
+        }
+
+        /* Botón superior para volver al inicio */
+        .top-bar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .top-bar a {
+            background: #004d00;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .top-bar a:hover {
+            background: #003300;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .card {
+                font-size: 20px;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Botón superior para volver al inicio -->
+<div class="top-bar">
+    <a href="#" onclick="goHome()">Volver al Inicio</a>
+</div>
+
+<!-- Página principal con las carreras -->
+<div id="carreras" class="container">
+    <h1>Carreras Disponibles</h1>
+    <div class="grid">
+        <div class="card" onclick="showSemestres('contador')">Contador Público</div>
+        <div class="card" onclick="showSemestres('gastronomia')">Gastronomía</div>
+        <div class="card" onclick="showSemestres('ambiental')">Ingeniería Ambiental</div>
+        <div class="card" onclick="showSemestres('administracion')">Ingeniería en Administración</div>
+        <div class="card" onclick="showSemestres('sistemas')">Ingeniería en Sistemas Computacionales</div>
+        <div class="card" onclick="showSemestres('tics')">Ingeniería en TICs</div>
+        <div class="card" onclick="showSemestres('renovables')">Ingeniería en Energías Renovables</div>
+        <div class="card" onclick="showSemestres('industrial')">Ingeniería Industrial</div>
+    </div>
+</div>
+
+<!-- Página con semestres -->
+<div id="semestres" class="container hidden">
+    <h1 id="titulo-semestres">Semestres</h1>
+    <div class="grid" id="semestres-list"></div>
+    <a href="#" onclick="goBack('carreras')" class="btn">Volver a Carreras</a>
+</div>
+
+<!-- Página con materias -->
+<div id="materias" class="container hidden">
+    <h1 id="titulo-materias">Materias del Semestre</h1>
+    <div class="grid" id="materias-list"></div>
+    <a href="#" onclick="goBack('semestres')" class="btn">Volver a Semestres</a>
+</div>
+
+<script>
+    // Estructura de materias por carrera y semestre
+    const materias = {
+        contador: {
+            "1": ["Contabilidad Básica", "Matemáticas I", "Derecho Empresarial"],
+            "2": ["Contabilidad Financiera", "Economía", "Gestión Administrativa"],
+            "3": ["Auditoría I", "Costos", "Derecho Fiscal"],
+            "4": ["Auditoría II", "Presupuestos", "Finanzas"],
+            "5": ["Contabilidad Avanzada", "Sistemas Contables", "Impuestos"],
+            "6": ["Auditoría III", "Contabilidad de Sociedades", "Ética Profesional"],
+            "7": ["Planeación Fiscal", "Normas Internacionales", "Finanzas Corporativas"],
+            "8": ["Contabilidad Forense", "Gestión de Riesgos", "Consultoría"],
+            "9": ["Seminario de Tesis", "Prácticas Profesionales", "Proyectos Contables"]
+        }
+    };
+
+    // Mostrar los semestres al seleccionar una carrera
+    function showSemestres(carrera) {
+        document.getElementById("carreras").classList.add("hidden");
+        document.getElementById("semestres").classList.remove("hidden");
+
+        const semestresList = document.getElementById("semestres-list");
+        semestresList.innerHTML = "";
+
+        for (let i = 1; i <= 9; i++) {
+            const div = document.createElement("div");
+            div.className = "card";
+            div.textContent = `${i}° Semestre`;
+            div.onclick = () => showMaterias(carrera, i);
+            semestresList.appendChild(div);
+        }
+    }
+
+    // Mostrar las materias del semestre seleccionado
+    function showMaterias(carrera, semestre) {
+        document.getElementById("semestres").classList.add("hidden");
+        document.getElementById("materias").classList.remove("hidden");
+
+        const materiasList = document.getElementById("materias-list");
+        materiasList.innerHTML = "";
+
+        const materiasSemestre = materias[carrera][semestre] || ["No hay materias disponibles."];
+
+        materiasSemestre.forEach(materia => {
+            const div = document.createElement("div");
+            div.className = "card";
+            div.textContent = materia;
+            materiasList.appendChild(div);
+        });
+    }
+
+    // Navegación
+    function goBack(section) {
+        document.getElementById("carreras").classList.add("hidden");
+        document.getElementById("semestres").classList.add("hidden");
+        document.getElementById("materias").classList.add("hidden");
+        document.getElementById(section).classList.remove("hidden");
+    }
+
+    function goHome() {
+        goBack('carreras');
+    }
+</script>
+
+</body>
+</html>
